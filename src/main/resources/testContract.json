@@ -1,0 +1,14 @@
+[
+  {
+    "fieldName": "test1",
+    "fieldType": "Categorical"
+  },
+  {
+    "fieldName": "test2",
+    "fieldType": "Categorical"
+  },
+  {
+    "fieldName": "test3",
+    "fieldType": "Numeric"
+  }
+]

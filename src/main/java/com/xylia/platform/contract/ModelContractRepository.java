@@ -12,6 +12,17 @@ public class ModelContractRepository {
 
     private static final List<ModelContract> modelContracts = new ArrayList<>();
 
+    public static final ModelContractRepository create() {
+        return new ModelContractRepository();
+    }
+
+    public static final ModelContractRepository createWithModelContract(ModelContract modelContract) {
+        ModelContractRepository modelContractRepository = new ModelContractRepository();
+        modelContractRepository.addToRepository(modelContract);
+
+        return modelContractRepository;
+    }
+
     public void addToRepository(ModelContract modelContract) {
         checkNotNull(modelContract);
         modelContracts.add(modelContract);

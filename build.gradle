@@ -7,6 +7,7 @@ plugins {
 group = 'com.xylia.platform'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+targetCompatibility = "1.8"
 
 configurations {
     compileOnly {
@@ -25,9 +26,10 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'junit:junit:4.12'
 }
 
 test {

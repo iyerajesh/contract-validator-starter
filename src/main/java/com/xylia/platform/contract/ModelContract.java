@@ -1,8 +1,7 @@
 package com.xylia.platform.contract;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ModelContract {
 
@@ -43,8 +42,31 @@ public class ModelContract {
                 Objects.equals(fieldContracts, that.fieldContracts);
     }
 
+    public final boolean isContractValid(Map<String, Object> inputData) {
+        return isFieldNameContractValid(inputData)
+                && isFieldContractValid(inputData);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(modelName, fieldContracts);
     }
+
+    private boolean isFieldNameContractValid(final Map<String, Object> inputData) {
+
+        Set<String> fieldNamesFromContract = fieldContracts.stream()
+                .map(fieldContract -> fieldContract.getFieldName()).collect(Collectors.toSet());
+
+        return fieldNamesFromContract.containsAll(inputData.keySet())
+                && fieldNamesFromContract.size() == inputData.size();
+    }
+
+    private boolean isFieldContractValid(Map<String, Object> inputData) {
+        for (FieldContract fieldContract : fieldContracts) {
+            if (!fieldContract.validateDataType(inputData))
+                return false;
+        }
+        return true;
+    }
+
 }
